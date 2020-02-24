@@ -1,0 +1,6 @@
+RewriteEngine on
+AddType application/x-shockwave-flash .swf
+RewriteCond $1 !^(index\.php|resources|MobileSiteImage|robots\.txt|flash)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
