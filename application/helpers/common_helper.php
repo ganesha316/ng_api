@@ -1,5 +1,10 @@
 <?php
 
+function get_json_post($response_in_array = TRUE)
+{
+    return json_decode(file_get_contents("php://input"), $response_in_array);
+}
+
 function admin_url($append='')
 {
 	$ci = & get_instance();

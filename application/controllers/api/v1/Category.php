@@ -145,6 +145,38 @@ class Category extends API_Controller {
 
 		$this->response($results);	
 	}
+
+	public function brandFilter()
+	{
+		$post = get_json_post();
+		$results = $this->common->select_data_array_options([
+			'table'    => 'products p',
+			'select'   => 'p.id,p.name,p.price,p.category_id,p.brand_id,p.img_path,b.name as brand_name, c.name as category_name',
+			'join' => [
+				['table' => 'brand b', 'condition' => 'b.id = p.brand_id', 'type' => 'left'],
+				['table' => 'category c', 'condition' => 'c.id = p.category_id', 'type' => 'left'],
+			],
+			'where' => ['p.brand_id' => $post['id']]
+		]);
+
+		$this->response($results);	
+	}
+
+	public function categoryFilter()
+	{
+		$post = get_json_post();
+		$results = $this->common->select_data_array_options([
+			'table'    => 'products p',
+			'select'   => 'p.id,p.name,p.price,p.category_id,p.brand_id,p.img_path,b.name as brand_name, c.name as category_name',
+			'join' => [
+				['table' => 'brand b', 'condition' => 'b.id = p.brand_id', 'type' => 'left'],
+				['table' => 'category c', 'condition' => 'c.id = p.category_id', 'type' => 'left'],
+			],
+			'where' => ['p.category_id' => $post['cat_id']]
+		]);
+
+		$this->response($results);	
+	}
 }
 
 /* End of file Category.php */
